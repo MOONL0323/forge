@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+Nothing yet.
+
+## 1.1.0 — 2026-04-08
+
+### New Skills
+- `harness-fix-ci` — **CI failure auto-fix killer feature**. Reads failure logs via GitHub API, applies minimal fix, creates PR. Triggered by workflow_run or called directly via `/fix-ci`.
+- `harness-cost` — **Team-level AI spend visibility**. Per-PR token tracking, author/reviewer attribution, exportable CSV/JSON reports, budget alerts.
+
 ### Added
 - `install.sh` — one-command installer (curl | bash)
 - `CONTRIBUTING.md` / `CONTRIBUTING_zh-CN.md` — contribution guide
@@ -15,12 +23,11 @@
 - `.github/FUNDING.yml` — GitHub Sponsors link
 - `.claude/commands/fix-ci.md` — `/fix-ci` command entry point
 
-### New Skills
-- `harness-fix-ci` — **CI failure auto-fix killer feature**. Reads failure logs via GitHub API, applies minimal fix, creates PR. Triggered by workflow_run or called directly via `/fix-ci`.
-- `harness-cost` — **Team-level AI spend visibility**. Per-PR token tracking, author/reviewer attribution, exportable CSV/JSON reports, budget alerts.
-
 ### Improved
-- `harness-onboard`: Added **Step 6.5 Sprint Contract Validator Gate** — hard enforcement: Planner output must pass black-box format validation before entering Builder. ACs must describe externally observable behavior (UI/API/CLI/log), no source code references allowed.
+- `harness-onboard`: Added **Step 6.5 Sprint Contract Validator Gate** — hard enforcement: Planner output must pass black-box format validation before entering Builder.
+- `harness-upgrade` / `harness-dev` / `harness-init`: Fixed install path from `~/.team-harness/` to `~/.forge/`.
+- README: added CI + Skills shields.io badges.
+- dev.md.tmpl: added `harness-fix-ci` and `harness-cost` to built-in skills table.
 
 ## 2.8.0 — 2026-04-07
 
