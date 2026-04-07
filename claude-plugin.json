@@ -67,6 +67,16 @@
       "id": "harness-worktree",
       "path": "skills/harness-worktree/SKILL.md",
       "title": "Harness 隔离 Worktree 构建循环"
+    },
+    {
+      "id": "harness-fix-ci",
+      "path": "skills/harness-fix-ci/SKILL.md",
+      "title": "CI 失败自动修复"
+    },
+    {
+      "id": "harness-cost",
+      "path": "skills/harness-cost/SKILL.md",
+      "title": "AI 成本归因与团队可见性"
     }
   ]
 }

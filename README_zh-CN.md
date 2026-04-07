@@ -122,7 +122,7 @@ AI：🎯 开始执行...（自动完成所有步骤）
 
 ## 📦 Skills
 
-Forge 由 14 个独立 skill 组成，分为三层：
+Forge 由 16 个独立 skill 组成，分为三层：
 
 ### 框架层（Foundation）
 
@@ -141,6 +141,8 @@ Forge 由 14 个独立 skill 组成，分为三层：
 | `/harness-review` | 双 Agent 对抗 Review，3-way verdict，Anti-leniency 评分 |
 | `/harness-verify` | Playwright Live 环境验证，7-Phase Design Review |
 | `/harness-worktree` | 独立 worktree 构建循环（串行/并行/临时三种模式） |
+| `/harness-fix-ci` | CI 失败自动修复 — 分析日志 + 修 + 创建 PR |
+| `/harness-cost` | AI 成本归因 — per-PR 追踪、团队报告、预算预警 |
 
 ### 自动化层（Automation）
 

@@ -11,7 +11,7 @@
 | `framework/version` | 框架版本号，用于升级检测 |
 | `templates/module/` | 完整模块 harness 模板（cmd/app 类型） |
 | `templates/pkg/` | 轻量包 harness 模板（pkg 类型） |
-| `skills/harness-*/SKILL.md` | 14 个独立 skill（Foundation / Execution / Automation 三层） |
+| `skills/harness-*/SKILL.md` | 16 个独立 skill（Foundation / Execution / Automation 三层） |
 | `CHANGELOG.md` | 版本变更历史 |
 | `CONTRIBUTING.md` | 贡献指南 |
 | `install.sh` | 一键安装脚本 |
@@ -33,7 +33,7 @@
 - 各模块目录下的 `.harness/context/`（由模块负责人维护）
 - 各模块目录下的 `.harness/overrides/`（由模块负责人维护）
 
-## 可用 Skill（全部 14 个）
+## 可用 Skill（全部 16 个）
 
 安装到 Claude Code 后，以下命令可直接使用：
 
@@ -52,6 +52,8 @@
 | `/harness-review` | 双 Agent 对抗 Review，3-way verdict，Anti-leniency 评分 |
 | `/harness-verify` | Playwright Live 环境验证，7-Phase Design Review |
 | `/harness-worktree` | 独立 worktree 构建循环（串行 / 并行 / 临时三种模式）|
+| `/harness-fix-ci` | CI 失败自动修复 — 分析日志 + 修 + 创建 PR |
+| `/harness-cost` | AI 成本归因 — per-PR 追踪、团队报告、预算预警 |
 
 ### Automation 层
 | 命令 | 功能 |

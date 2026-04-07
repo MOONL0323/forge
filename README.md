@@ -122,7 +122,7 @@ AI: 🎯 Executing... (automatically completes all steps)
 
 ## 📦 Skills
 
-Forge is composed of 14 independent skills across three layers:
+Forge is composed of 16 independent skills across three layers:
 
 ### Foundation Layer
 
@@ -141,6 +141,8 @@ Forge is composed of 14 independent skills across three layers:
 | `/harness-review` | Dual-agent adversarial review, 3-way verdict, anti-leniency scoring |
 | `/harness-verify` | Playwright live verification, 7-Phase Design Review |
 | `/harness-worktree` | Isolated worktree build cycles (serial / parallel / temp models) |
+| `/harness-fix-ci` | CI failure auto-fix — reads logs, applies fix, creates PR |
+| `/harness-cost` | Team-level AI spend visibility — per-PR tracking, attribution, reports |
 
 ### Automation Layer
 

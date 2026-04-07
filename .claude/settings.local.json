@@ -30,7 +30,10 @@
       "Bash(git remote:*)",
       "Bash(git branch:*)",
       "Bash(git push:*)",
-      "Bash(git commit -m 'Add MIT LICENSE:*)"
+      "Bash(git commit -m 'Add MIT LICENSE:*)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:smithery.ai)",
+      "WebFetch(domain:superpowers-marketplace.com)"
     ]
   }
 }
