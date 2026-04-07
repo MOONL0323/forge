@@ -35,10 +35,13 @@
 
 ## 🚀 快速开始
 
-### 1. 安装
+### 1. 安装 — 一行命令
 
 ```bash
-# 安装 Forge
+# 最快方式（推荐）
+curl -sSL https://raw.githubusercontent.com/MOONL0323/forge/main/install.sh | bash
+
+# 或手动：
 git clone https://github.com/MOONL0323/forge.git ~/.forge
 cp -r ~/.forge/skills/* ~/.claude/skills/
 

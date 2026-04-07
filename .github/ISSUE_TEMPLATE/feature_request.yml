@@ -1,0 +1,46 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+labels: [enhancement]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for Forge? We'd love to hear it!
+
+        For bugs, use the Bug Report template instead.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Pain Point
+      description: What problem does this solve?
+      placeholder: "I find myself doing X manually, which is tedious because..."
+
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should Forge handle this?
+      placeholder: "It would be great if Forge could..."
+
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches you evaluated?
+      placeholder: "I looked at X but it doesn't..."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Use cases, team size, workflow, etc.
+      placeholder: "Our team has 10 engineers working in a monorepo..."

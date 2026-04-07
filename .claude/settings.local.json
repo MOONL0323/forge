@@ -25,7 +25,12 @@
       "Bash(gh auth:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m ':*)"
+      "Bash(git commit -m ':*)",
+      "Bash(git commit -m 'Fix GitHub URLs in README badges:*)",
+      "Bash(git remote:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git commit -m 'Add MIT LICENSE:*)"
     ]
   }
 }

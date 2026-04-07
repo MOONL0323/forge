@@ -35,10 +35,13 @@
 
 ## 🚀 Quick Start
 
-### 1. Install
+### 1. Install — One Command
 
 ```bash
-# Clone Forge
+# The fast way (recommended)
+curl -sSL https://raw.githubusercontent.com/MOONL0323/forge/main/install.sh | bash
+
+# Or manually:
 git clone https://github.com/MOONL0323/forge.git ~/.forge
 cp -r ~/.forge/skills/* ~/.claude/skills/
 

@@ -1,0 +1,60 @@
+name: Bug Report
+description: Report something that doesn't work as expected
+labels: [bug]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the template below.
+
+        **Before submitting**: Check if the issue already exists.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of the bug
+      placeholder: |
+        What happened vs what you expected to happen
+
+        Steps to reproduce:
+        1. Go to '...'
+        2. Run '/harness-xxx'
+        3. See error
+
+    validations:
+      required: true
+
+  - type: textarea
+    id: skill
+    attributes:
+      label: Skill Involved
+      description: Which skill triggered the bug?
+      placeholder: "/harness-xxx"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Claude Code version, other relevant details
+      placeholder: |
+        OS: Windows 11
+        Claude Code version: 1.0.x
+        Forge version: (check framework/version)
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs
+      description: Any error output or logs
+      placeholder: Paste error output here
+
+  - type: checkboxes
+    id: search
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues before submitting
+          required: true

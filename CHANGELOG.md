@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- `install.sh` — one-command installer
+- `CONTRIBUTING.md` / `CONTRIBUTING_zh-CN.md` — contribution guide
+- `CLAUDE.md` — contributor workflow reference
+- `.github/ISSUE_TEMPLATE/` — bug report + feature request templates
+- `.github/PULL_REQUEST_TEMPLATE.md` — PR template
+- `.github/workflows/ci.yml` — skill frontmatter and file-presence checks
+- `README.md` + `README_zh-CN.md` — bilingual README (split into two files)
+
 ## 2.8.0 — 2026-04-07
 
 ### 模型面向指令英文化
