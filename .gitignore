@@ -17,6 +17,7 @@ node_modules/
 
 # Claude Code local
 .claude/commands/local/
+.claude/settings.local.json
 
 # Temporary files
 *.tmp

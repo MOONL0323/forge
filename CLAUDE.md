@@ -38,14 +38,20 @@ git init
 # 4. Verify output is sensible
 ```
 
-### Version bumping
+### Version bumping (after every user-facing change)
 
 ```
 framework/version format: MAJOR.MINOR.PATCH (e.g. 1.0.1)
-Patch: bug fixes
+Patch: bug fixes, doc improvements
 Minor: new features (non-breaking)
-Major: breaking changes
+Major: breaking changes to skill interfaces
 ```
+
+**Rules:**
+- Every PR that changes skills must bump `framework/version`
+- Update CHANGELOG.md under `[Unreleased]` before committing
+- New skills require: `name` + `description` in frontmatter + entry in `claude-plugin.json`
+- Never remove skills (deprecate instead)
 
 ---
 

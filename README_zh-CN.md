@@ -9,6 +9,8 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Ready-brightgreen)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/MOONL0323/forge?style=social)](https://github.com/MOONL0323/forge/stargazers)
+[![Skills](https://img.shields.io/badge/16%20Skills-16-brightgreen?style=flat-square&labelColor=233336)](https://github.com/MOONL0323/forge#-skills)
+[![CI](https://img.shields.io/github/actions/workflow/status/MOONL0323/forge/ci.yml?style=flat-square&label=CI)](https://github.com/MOONL0323/forge/actions)
 
 > 你描述需求，Forge 自动完成：工作类型识别 → 影响面分析 → 方案设计 → 编码实现 → 对抗审查 → PR 创建。全程多角色 Agent 协作，每一步可配置、可跳过、可量化。
 
@@ -30,6 +32,7 @@
 | **预算管理** | 预防性预算预警 + 透支策略（ask / allow / deny），完成后输出费用汇总 |
 | **Live 环境验证** | Playwright 截图 + 7-Phase Design Review（Interaction / Responsive / Visual / A11y / Robust / Code / Console） |
 | **Sprint Contract** | 验收标准必须从 UI/API/CLI 可测，不读源码，Planner 产出强制符合此格式 |
+| **成本归因** | per-PR token 追踪、作者/审查者归因、团队费用报告、预算预警 |
 
 ---
 

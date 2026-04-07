@@ -9,6 +9,8 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Ready-brightgreen)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/MOONL0323/forge?style=social)](https://github.com/MOONL0323/forge/stargazers)
+[![Skills](https://img.shields.io/badge/16%20Skills-16-brightgreen?style=flat-square&labelColor=233336)](https://github.com/MOONL0323/forge#-skills)
+[![CI](https://img.shields.io/github/actions/workflow/status/MOONL0323/forge/ci.yml?style=flat-square&label=CI)](https://github.com/MOONL0323/forge/actions)
 
 > Describe intent. Forge handles the rest: requirement classification → impact analysis → design → implementation → adversarial review → PR creation. Multi-agent collaboration with full observability, configurability, and quantifiability at every step.
 
@@ -30,6 +32,7 @@
 | **Budget Management** | Preventive warning + reactive warning. Three overdraft policies: ask / allow / deny. |
 | **Live Environment Verification** | Playwright screenshots + 7-Phase Design Review (Interaction / Responsiveness / Visual / A11y / Robust / Code / Console). |
 | **Sprint Contracts** | Acceptance criteria must be verifiable from UI/API/CLI. No source code reading. Planner output must conform. |
+| **Cost Attribution** | Per-PR token tracking, author/reviewer attribution, team spend reports, budget alerts. |
 
 ---
 
