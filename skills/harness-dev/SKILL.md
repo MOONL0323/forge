@@ -15,7 +15,7 @@ description: 模块开发主循环。轻量协调者：加载上下文后调用 
 
 ## Step 0：版本检查（非阻塞，每次对话开始时）
 
-读取 `.harness/framework/version`，与 `~/.team-harness/framework/version` 对比：
+读取 `.harness/framework/version`，与 `~/.forge/framework/version` 对比：
 
 - 版本相同 → 静默，继续
 - 当前低于最新 → 旁路提示，不阻断开发：
@@ -25,7 +25,7 @@ description: 模块开发主循环。轻量协调者：加载上下文后调用 
    要现在升级吗？(y / 稍后 / 跳过)
 ```
 
-- `~/.team-harness/` 不存在 → 静默跳过
+- `~/.forge/` 不存在 → 静默跳过
 
 ---
 
