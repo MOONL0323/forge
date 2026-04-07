@@ -1,0 +1,132 @@
+# 规范与约束
+
+> 文档会腐烂，lint 规则不会。
+> 在 `enforcement:` YAML 块（见下方）中定义可机器执行的规则。
+> 执行 `/harness-enforce` 将这些规则翻译为 lint/hook/CI 检查。
+
+---
+
+## 代码规范
+<!-- 本模块特有的编码要求（通用规范已在项目根 .roo/rules 中） -->
+- TODO
+
+## 禁止项
+<!-- 绝对不能做的事，写明原因 -->
+- TODO：原因 TODO
+
+## 高危区域
+<!-- 修改这些文件/函数需要格外小心 -->
+- `TODO 文件路径`：TODO 原因（如：高频变更 / 多个调用方 / 历史 bug 区域）
+
+## 测试要求
+<!-- 本模块的测试覆盖要求 -->
+- TODO（如：核心路径必须有集成测试 / 禁止 mock DB）
+
+## 部署注意
+<!-- 上线前必须检查的事项 -->
+- TODO
+
+---
+
+## 机器可执行规则
+
+> 以下 `enforcement:` YAML 块可被 `/harness-enforce` 解析并翻译为实际的检查脚本。
+> 请在 `dev.md` 的 `enforcement:` 块中维护此配置。
+
+```yaml
+# 格式参考 harness-enforce/SKILL.md 中的完整规则说明
+enforcement:
+
+  # 高频变更文件保护
+  # 近 30 天修改超过 threshold 次的文件，修改时 warn 或 block
+  high-frequency-files:
+    behavior: warn        # warn=提示审查，block=禁止直接合并
+    threshold: 5
+    exclude:
+      - "*_test.go"
+      - "*.json"
+      - "*.md"
+
+  # pkg 接口变更通知
+  # 涉及公开接口修改时，强制通知 pkg owner
+  pkg-interface-changes:
+    behavior: notify
+    notify-via: pr-comment  # pr-comment | slack | email
+
+  # 测试覆盖率要求
+  # 指定路径下的文件必须有对应测试文件
+  test-requirement:
+    behavior: warn         # warn=提示，block=禁止合并
+    patterns:
+      - "**/service/*.go"
+      - "**/handler/*.ts"
+    require-file-pattern: "*_test.*"
+    min-coverage: 60       # 最低覆盖率（%）
+
+  # 文件大小限制
+  # 超过 limit 行的文件触发警告
+  file-size-limit:
+    behavior: warn
+    limit: 500
+    exclude:
+      - "*.pb.go"
+      - "**/generated/*"
+      - "vendor/**"
+
+  # 禁止直接修改的文件
+  # 这些文件只能通过特定流程修改
+  protected-files:
+    behavior: block
+    patterns:
+      - ".env"
+      - "**/schema.sql"
+      - "**/config.prod.*"
+    require-pr: true
+
+  # 日志规范
+  # 禁止的日志调用（必须用结构化日志）
+  logging-standard:
+    behavior: warn
+    forbid:
+      - "console.log"
+      - "console.debug"
+      - "fmt.Print"
+      - "print("
+    require:
+      - "logger."
+      - "log."
+      - "slog."
+
+  # 敏感信息检测
+  # 检测硬编码的敏感信息
+  secrets-detection:
+    behavior: block
+    patterns:
+      - 'password\s*='
+      - 'api_key\s*='
+      - 'apiKey\s*='
+      - 'secret\s*='
+      - 'token\s*='
+      - 'Bearer '
+
+  # 错误处理规范
+  # 不允许的错误处理模式
+  error-handling:
+    behavior: warn
+    forbid:
+      - "return nil"           # 未包装的错误
+      - "_ = err"             # 被忽略的错误
+      - "panic("              # 禁止 panic
+      - "os.Exit("            # 禁止 os.Exit
+```
+
+---
+
+## Golden Rules
+
+<!-- 用自然语言描述团队的品味规则。
+     这些会被编码为 lint 规则并持续应用于每一行新代码。
+     参考：OpenAI "品味的传播路径：人类审查 → 文档 → lint 规则 → 自动应用" -->
+- TODO：例如"所有配置必须通过 config.yaml，不要硬编码"
+- TODO：例如"禁止使用 time.Sleep() 进行等待，使用 channel 或条件变量"
+- TODO：例如"数据库操作必须通过 Repo 接口，禁止直接访问 sql.DB"

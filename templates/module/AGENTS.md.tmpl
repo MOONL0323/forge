@@ -1,0 +1,118 @@
+# {{MODULE_NAME}} Harness
+
+> 本文件是 AI Agent 的行为触发器。Claude Code 在本目录首次对话时会自动读取并激活。
+> **核心原则**：用户描述意图，AI 自动判断该调用什么技能，不需要用户说 `/harness-xxx` slash 命令。
+
+---
+
+## 自动触发规则
+
+### 开发需求（自动调用 harness-dev）
+
+当用户描述**任何开发需求**时，立即自动激活：
+
+```
+用户：「帮我在用户模块加个黑名单过滤功能」
+用户：「把这个接口重构一下」
+用户：「修一下登录报 500 错误的 bug」
+```
+
+**不需要用户说 `/harness-dev`**，直接开始：
+
+1. 加载 `.harness/context/` 下所有文件
+2. 调用 harness-onboard（影响面分析 + 工作类型推断 + 流程确认）
+3. 用户确认后调用 harness-roles（执行）
+4. 完成后提示上下文沉淀
+
+### Debug/调查（自动调用 harness-loop debug 模式）
+
+```
+用户：「帮我 debug 这个登录失败的问题」
+用户：「调查一下为什么这个接口响应慢」
+```
+
+自动切换到 `debug` workflow：investigate → reproduce → fix → verify
+
+### 研究/调研（自动调用 harness-loop research 模式）
+
+```
+用户：「调研一下 OAuth2 的实现方案」
+用户：「分析一下我们现有的缓存架构」
+```
+
+自动切换到 `research` workflow：explore → analyze → synthesize
+
+### 自主运行（自动调用 harness-loop）
+
+```
+用户：「让 AI 自主运行今晚的需求」
+用户：「跑 Ralph 循环」
+```
+
+如果 `.harness/loop/tasks.json` 存在，继续上次运行。
+如果不存在，引导拆分任务后启动。
+
+### 规则/约束更新（自动调用 harness-enforce）
+
+```
+用户：「更新一下测试覆盖率要求」
+用户：「添加一个新的 enforcement 规则」
+```
+
+当用户修改了 constraints.md 或 dev.md 中的 enforcement 块时，自动调用 harness-enforce 生成对应的 lint/hook 脚本。
+
+### 清理/健康检查（自动调用 harness-gc）
+
+```
+用户：「扫描一下代码有什么问题」
+用户：「清理技术债」
+用户：「检查文档和代码是否一致」
+```
+
+### 框架升级（自动调用 harness-upgrade）
+
+```
+用户：「更新一下 harness 框架」
+```
+
+当检测到 `.harness/framework/version` 低于 `~/.team-harness/framework/version` 时，主动提示。
+
+### 初始化（自动调用 harness-init）
+
+```
+用户：「帮我初始化这个模块的 harness」
+用户：「这个项目还没有 harness」
+```
+
+---
+
+## 自动触发时的通用行为
+
+### 永远先加载上下文
+
+无论触发哪个 skill，**必须先加载**：
+
+```
+必须读取（fetch-first，不问用户）：
+  .harness/context/module.md       ← 模块负责什么
+  .harness/context/deps.md        ← 依赖哪些 pkg
+  .harness/context/arch.md        ← 架构决策
+  .harness/context/constraints.md ← 强制规则（含 enforcement）
+
+可选读取：
+  .harness/workflow/dev.md        ← 当前流程配置
+  .harness/loop/tasks.json       ← 循环任务状态
+```
+
+### 永远不要做的事
+
+- **不要**在用户描述需求后直接开始写代码（必须先影响面分析）
+- **不要**覆盖 `.harness/context/` 下的文件
+- **不要**在 constraints 未读取时就执行 lint 豁免
+- **不要**跳过 enforcement 规则的检查
+
+---
+
+## 当前框架版本
+
+`framework_version: {{FRAMEWORK_VERSION}}`

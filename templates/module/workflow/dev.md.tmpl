@@ -1,0 +1,143 @@
+# 开发流程编排
+
+> 本文件由 harness-onboard 和 harness-roles 解析。
+> 配置内容在 ```yaml 代码块中。代码块外的文字是注释，不参与解析。
+
+```yaml
+# ── 角色配置（默认值，可被 session_overrides 覆盖）──────────────────
+roles:
+  planner:
+    model: sonnet    # 注：Claude Code Agent 无法强制指定模型，此为行为风格指引
+    budget: $0.50
+  builder:
+    model: sonnet
+    budget: $2.00
+  critic:
+    model: sonnet
+    budget: $0.50
+  finalizer:
+    model: haiku
+    budget: $0.20
+
+# 透支策略: ask | allow | deny
+overdraft: ask
+
+# ── 流程插槽 ────────────────────────────────────────────────────────
+# 默认 workflow（new-feature 完整流程）：
+#   plan → implement → review → finish
+#
+# 可用 workflow 模式（通过自然语言切换）：
+#   /debug     → investigate → fix → verify → commit   （debug 专用）
+#   /research  → explore → synthesize                    （只读研究）
+#   /refactor  → plan → implement → review → commit     （重构，跳过 brainstorming）
+#   /config    → lint → review → commit                 （配置变更极简流程）
+#   /docs      → update → commit                         （文档变更）
+#
+# 每个插槽可绑定任意 skill。
+# skill 前缀 "harness-" 为框架内置；"superpowers:" 需安装 Superpowers plugin。
+# 若 skill 不可用，harness-roles 优先查找 fallback 字段，否则使用内置 fallback prompt。
+slots:
+  - name: plan
+    skill: superpowers:brainstorming
+    fallback: brainstorming
+    role: planner
+    milestone: true
+
+  - name: implement
+    skill: superpowers:subagent-driven-development
+    fallback: subagent-driven-development
+    role: builder
+    milestone: true
+
+  - name: review
+    skill: harness-review
+    role: critic
+
+  - name: finish
+    skill: superpowers:finishing-a-development-branch
+    fallback: finishing-a-development-branch
+    role: finalizer
+    milestone: true
+
+# ── 定制规则（自然语言条件规则，harness-onboard 在影响面分析后解读）──
+# 支持三种操作：skip（跳过）、insert-before、insert-after
+# 支持类型：new-feature | bugfix | refactor | new-module | new-project
+#            | config-change | docs-only | dependency-upgrade
+rules:
+  - "如果工作类型是 bugfix，跳过 plan 插槽"
+  - "如果工作类型是 refactor，跳过 plan 插槽"
+  - "如果工作类型是 config-change，使用 /config workflow"
+  - "如果工作类型是 docs-only，跳过 plan、implement、review 插槽"
+  - "如果工作类型是 dependency-upgrade，在 plan 前插入兼容性检查"
+  - "如果影响面涉及 pkg 公开接口变更，在 plan 前插入 pkg 主人确认检查点"
+  - "如果工作类型是 new-module，先触发 harness-init"
+  - "如果需求包含关键词「性能」或「优化」，在 implement 后插入性能测试插槽"
+
+# ── 机械执行规则（可被 harness-enforce 解析为 lint/hook/CI 检查）─────
+# 以下规则会被自动翻译为 enforcement 脚本。
+# 若不安装 harness-enforce，这些规则仅作为自然语言参考。
+enforcement:
+  # 高频变更文件：近 30 天超过 5 次提交的文件
+  high-frequency-files:
+    behavior: warn    # warn=提示 review，block=禁止直接修改
+    requires: pr-review
+
+  # pkg 接口变更：涉及公开接口修改时强制通知
+  pkg-interface-changes:
+    behavior: notify
+    notify: owner     # @mention contract.md 中的 owner
+
+  # 测试要求：没有测试的代码不允许合并
+  test-requirement:
+    behavior: block
+    patterns:
+      - "**/service/*.go"
+      - "**/handler/*.ts"
+    requires: "*.test.* OR *_test.*"
+
+  # 大文件限制：超过 500 行的文件需要拆分
+  file-size-limit:
+    behavior: warn
+    limit: 500
+```
+
+---
+
+## workflow 模式切换指南
+
+| 模式 | 触发方式 | 适用场景 |
+|------|---------|---------|
+| 默认（new-feature） | 默认激活 | 新功能、重大重构 |
+| /debug | 说"帮我 debug xxx" | 调试、问题定位 |
+| /research | 说"调研一下 xxx" | 技术调研、方案研究 |
+| /refactor | 说"重构 xxx" | 代码整理、架构优化 |
+| /config | 说"更新配置"或检测到 config 关键词 | 配置变更、环境变量 |
+| /docs | 说"更新文档" | 文档更新 |
+
+## 内置 fallback 技能说明
+
+当 Superpowers 未安装时，以下 skill 使用框架内置 fallback：
+
+| skill 名称 | fallback 行为 |
+|-----------|-------------|
+| `superpowers:brainstorming` | 引导式提问 → 方案设计 → 保存到 `.harness/plans/` |
+| `superpowers:subagent-driven-development` | 按 plan 执行任务，遵守 TDD，self-verify |
+| `superpowers:finishing-a-development-branch` | 验证测试 → 展示 merge/PR/keep/discard 选项 |
+
+**强烈推荐安装 Superpowers** 以获得完整功能：
+```
+/plugin install superpowers@superpowers-marketplace
+```
+
+框架内置 skill（无需 Superpowers）：
+
+| skill 名称 | 功能 |
+|-----------|------|
+| `harness-review` | 双 Agent 对抗 Review + GAN 评分 |
+| `harness-enforce` | 机械执行层（constraints → lint/hook） |
+| `harness-loop` | Ralph Wiggum 自主循环 |
+| `harness-gc` | 熵管理 + 技术债回收 |
+| `harness-validate` | Claude Code 文件 linter |
+| `harness-swarm` | 自学习 Multi-Agent Swarm |
+| `harness-verify` | Live 环境动态验证（Playwright） |
+| `harness-worktree` | 隔离 Worktree 构建 |
