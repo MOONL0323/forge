@@ -8,7 +8,7 @@
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Ready-brightgreen)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/your-username/forge?style=social)](https://github.com/your-username/forge/stargazers)
+[![Stars](https://img.shields.io/github/stars/MOONL0323/forge?style=social)](https://github.com/MOONL0323/forge/stargazers)
 
 > 你描述需求，Forge 自动完成：工作类型识别 → 影响面分析 → 方案设计 → 编码实现 → 对抗审查 → PR 创建。全程多角色 Agent 协作，每一步可配置、可跳过、可量化。
 
@@ -39,7 +39,7 @@
 
 ```bash
 # 安装 Forge
-git clone https://github.com/your-username/forge.git ~/.forge
+git clone https://github.com/MOONL0323/forge.git ~/.forge
 cp -r ~/.forge/skills/* ~/.claude/skills/
 
 # 安装 Superpowers（强烈推荐）

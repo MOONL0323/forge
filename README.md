@@ -8,7 +8,7 @@
 
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Ready-brightgreen)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/your-username/forge?style=social)](https://github.com/your-username/forge/stargazers)
+[![Stars](https://img.shields.io/github/stars/MOONL0323/forge?style=social)](https://github.com/MOONL0323/forge/stargazers)
 
 > Describe intent. Forge handles the rest: requirement classification → impact analysis → design → implementation → adversarial review → PR creation. Multi-agent collaboration with full observability, configurability, and quantifiability at every step.
 
@@ -39,7 +39,7 @@
 
 ```bash
 # Clone Forge
-git clone https://github.com/your-username/forge.git ~/.forge
+git clone https://github.com/MOONL0323/forge.git ~/.forge
 cp -r ~/.forge/skills/* ~/.claude/skills/
 
 # Install Superpowers (strongly recommended)
