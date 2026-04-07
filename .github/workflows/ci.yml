@@ -23,13 +23,14 @@ jobs:
               exit 1
             fi
           done
+          echo "Found $(find . -name "SKILL.md" | wc -l) skill files"
           echo "✅ All required files present"
 
       - name: Check skill frontmatter
         run: |
           echo "Checking skill frontmatter..."
           MISSING=0
-          for skill in skills/*/SKILL.md; do
+          for skill in $(find skills -name "SKILL.md" 2>/dev/null); do
             if ! grep -q "^name:" "$skill"; then
               echo "Missing name in: $skill"
               MISSING=1
@@ -39,8 +40,12 @@ jobs:
               MISSING=1
             fi
           done
-          [ "$MISSING" -eq 0 ] && echo "✅ All skills have frontmatter"
-          [ "$MISSING" -eq 1 ] && exit 1
+          if [ "$MISSING" -eq 0 ]; then
+            echo "✅ All skills have frontmatter"
+          else
+            echo "❌ Some skills are missing frontmatter"
+            exit 1
+          fi
 
       - name: Check version file
         run: |
